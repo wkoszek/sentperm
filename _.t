@@ -1,0 +1,2 @@
+isconn == NULL
+waslost != NULL
