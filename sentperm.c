@@ -38,6 +38,8 @@
 #include <getopt.h>
 #endif
 
+static int	g_debug;
+
 struct sent {
 	char	*st_text;
 	char	*st_cmt;
@@ -74,7 +76,7 @@ stm_read_file(struct sent *sts, int sts_max)
 			*lineend = '\0';
 			lineend--;
 		}
-		if (strlen(line) <= 1)
+		if (strlen(line) < 1)
 			break;
 		data = strdup(line);
 		assert(data != NULL);
@@ -107,7 +109,7 @@ static void
 usage(void)
 {
 
-	(void)fprintf(stderr, "sentperm [-h] [arg0 [arg1 ...]]\n");
+	(void)fprintf(stderr, "sentperm [-dh] [arg0 [arg1 ...]]\n");
 	exit(EXIT_SUCCESS);
 }
 
@@ -121,8 +123,12 @@ main(int argc, char **argv)
 
 	bi = i = si = 0;
 
-	while ((o = getopt(argc, argv, "h")) != -1)
+	g_debug = 0;
+	while ((o = getopt(argc, argv, "hd")) != -1)
 		switch (o) {
+		case 'd':
+			g_debug++;
+			break;
 		case 'h':
 			usage();
 			break;
@@ -130,10 +136,15 @@ main(int argc, char **argv)
 	argc--;
 	argv++;
 
-	if (argc >= 1)
+	if (argc >= 1) {
 		si = stm_read_argv(sts, STM_MAX, argc, argv);
-	else
+	} else {
 		si = stm_read_file(sts, STM_MAX);
+	}
+
+	if (g_debug) {
+		printf("# sentences read: %d\n", si);
+	}
 
 	if (si == 0)
 		return (EXIT_SUCCESS);
