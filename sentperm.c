@@ -25,7 +25,7 @@
  *
  * $Id$
  */
-
+#define _BSD_SOURCE
 
 #include <assert.h>
 #include <ctype.h>
