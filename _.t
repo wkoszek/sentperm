@@ -1,2 +1,0 @@
-isconn == NULL
-waslost != NULL
