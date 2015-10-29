@@ -41,3 +41,8 @@ Sample use-case:
 	 x is negative !y is 0  z is 7
 	!x is negative  y is 0  z is 7
 	 x is negative  y is 0  z is 7
+
+# Author
+
+- Wojciech Adam Koszek, [wojciech@koszek.com](mailto:wojciech@koszek.com)
+- [http://www.koszek.com](http://www.koszek.com)
